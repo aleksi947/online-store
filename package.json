@@ -2,7 +2,7 @@
   "name": "online-store",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aleksi947.github.io/Store",
+  "homepage": "https://aleksi947.github.io/online-store",
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -35,8 +35,6 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
-    
-
   },
   "eslintConfig": {
     "extends": [
