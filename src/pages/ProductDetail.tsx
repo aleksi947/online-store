@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
   max-width: 600px;
@@ -80,8 +81,16 @@ const ProductDetail: React.FC = () => {
   const handleAddToCart = () => {
     if (product) {
       dispatch(addToCart({ id: product.id, name: product.title, price: product.price }));
+
+       // Показываем уведомление
+    toast.success('Товар добавлен в корзину!', {
+      position: "top-right",
+      autoClose: 2000,
+    });
     }
   };
+
+  
 
   if (!product) {
     return <p>Loading...</p>;

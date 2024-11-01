@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { RootState } from '../store/store';
-import { clearCart } from '../store/cartSlice';
+import { clearCart, removeFromCart } from '../store/cartSlice';
+
 
 const CartContainer = styled.div`
   max-width: 800px;
@@ -37,6 +38,21 @@ const ProceedToCheckoutButton = styled(Link)`
   }
 `;
 
+// Добавляем стилизованный компонент RemoveButton
+const RemoveButton = styled.button`
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: #c82333;
+  }
+`;
+
 const ClearCartButton = styled.button`
   background-color: #dc3545;
   color: white;
@@ -57,6 +73,10 @@ const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
+  const handleRemoveFromCart = (id: number) => {
+    dispatch(removeFromCart(id));
+  };
+
   const handleClearCart = () => {
     dispatch(clearCart());
   };
@@ -75,6 +95,9 @@ const Cart = () => {
               <ProceedToCheckoutButton to={`/checkout?item=${item.id}`}>
                 Proceed to Checkout
               </ProceedToCheckoutButton>
+              <RemoveButton onClick={() => handleRemoveFromCart(item.id)}>
+                Remove
+              </RemoveButton>
             </CartItem>
           ))}
           <TotalPrice>Total Price: ${totalPrice}</TotalPrice>
